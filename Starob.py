@@ -5,7 +5,7 @@ class Starob(Displayable):
     """Starob is the spaceship. It can move around, has a shield, a radius
     (which defines its hitbox), a life that dwindles when the hitbox is touched.
     Angle and a speed give the 2D speed vector."""
-    def __init__(self, pos, sprite):
+    def __init__(self, pos, spriteName='res/starob.png'):
         # init values for Starob
         super().__init__(pos, sprite);
         self.life = 10;
@@ -27,6 +27,7 @@ class Starob(Displayable):
         """Returns whether Starob's life has run out"""
         return self.life <= 0;
 
-    def nextFrame():
+    def nextFrame(game):
         """Computes the next frame, ie calculates next position of Starob"""
+        self.angle = StarobBrain.chooseAngle(game)
         self.pos += speed*np.array([np.cos(angle), np.sin(angle)]);
