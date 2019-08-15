@@ -1,21 +1,20 @@
 import pygame;
 import numpy as np;
-from Starob import Starob;
-from FoeSwarm import FoeSwarm;
-from generatingFunctions import FlatSigmoid;
-from NaiveFoeBrain import NaiveFoeBrain;
+from hero import Starob;
+from enemy import FoeSwarm;
+from generating_functions import FlatSigmoid;
 
 class Game():
     """Class that manages the frames and loops"""
-    def __init__(self, dim=1024, nbStar=1, displayed=True, maxframes=1000):
+    def __init__(self, dim=1024, displayed=True, maxframes=1000):
         self.dim = dim;
         self.displayed = displayed;
         self.maxframes = maxframes;
-        starRadius = dim/8/2;
-        foeRadius = dim/8/8;
+        star_radius = dim/8/2;
+        foe_radius = dim/8/8;
         # Create starobs and their foes
-        initPos = np.array([dim/2, dim/2]);
-        self.starray = [Starob(initPos) for i in range(nbStar)];
+        initPos = np.ones(2)*dim/2;
+        self.starob = Starob(initPos)
         # create FoeSwarm aiming at a random Starob
         self.foeSwarm = FoeSwarm(self,FlatSigmoid(self.maxframes),
             NaiveFoeBrain());
